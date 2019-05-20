@@ -1,0 +1,300 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"date",
+				"date_action"
+			],
+			[
+				"las",
+				"lastupdatedate"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/C/Users/DevOps/Desktop/import",
+			"settings":
+			{
+				"buffer_size": 245,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Trigger/Version_control/patients.sql",
+			"settings":
+			{
+				"buffer_size": 6707,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "DECLARE\n\tdate_action timestamp without time zone;\n\tv_id integer;\n\n\ti_rec_id integer;\n\ti_createby integer;\n\ti_createdate timestamp with time zone;\n\ti_lastupdateby integer;\n\ti_lastupdatedate timestamp with time zone;\n\ti_deleteby integer;\n\ti_deletedate timestamp with time zone;\n\t\n\t\nBEGIN\n\t\n\tIF TG_OP = 'UPDATE' THEN\n\t\tdate_action = now();\n\t\ti_rec_id = OLD.id;\n\t\ti_createby = OLD.createby;\n\t\ti_createdate = OLD.createdate ;\n\t\ti_lastupdateby = id FROM library.staffs WHERE staffs.login = current_user;\n\t\ti_lastupdatedate = now();\n\t\ti_deleteby = OLD.deleteby ;\n\t\ti_deletedate = OLD.deletedate ;\n\t\t\n\n\t\tv_id = max(id_edit)+1 FROM medical_vc.patients_vc WHERE rec_id = i_rec_id;\n\t\tNEW.lastupdateby := id FROM library.staffs WHERE staffs.login = current_user;\n\t\tNEW.lastupdatedate := now();\n\t\t\n\t\tRETURN NEW;\n\tELSIF TG_OP = 'INSERT' THEN\n\t\tdate_action = now();\n\t\ti_rec_id = NEW.id;\n\t\ti_createby = id FROM library.staffs WHERE staffs.login = current_user;\n\t\ti_createdate = now();\n\t\ti_lastupdateby = NEW.lastupdateby ;\n\t\ti_lastupdatedate = NEW.lastupdatedate ;\n\t\ti_deleteby = NEW.deleteby ;\n\t\ti_deletedate = NEW.deletedate ;\n\t\t\n\n\t\tNEW.createby := id FROM library.staffs WHERE staffs.login = current_user;\n\t\tNEW.createdate := now();\n\t\tv_id := 1;\n\t\t\n\t\t\n\n\n\t\tRETURN NEW;\n\tELSIF TG_OP = 'DELETE' THEN\n\t\tdate_action = now();\n\t\ti_rec_id = OLD.id;\n\t\ti_createby = OLD.createby;\n\t\ti_createdate = OLD.createdate ;\n\t\ti_lastupdateby = OLD.lastupdateby ;\n\t\ti_lastupdatedate = OLD.lastupdatedate ;\n\t\ti_deleteby = id FROM library.staffs WHERE staffs.login = current_user;\n\t\ti_deletedate = now();\n\t\t\n\n\t\tv_id = max(id_edit)+1 FROM medical_vc.patients_vc WHERE rec_id = i_rec_id;\n\n\n\t\tRETURN OLD;\n\tEND IF;\nEND;\n",
+			"settings":
+			{
+				"buffer_size": 1679,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 206.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/Programming/bbs/sources/ttlife24/SQL/Trigger/Version_control/patients.sql",
+		"/C/Programming/bbs/sources/paid_service/paid_service/Sprav/Стоматология.csv",
+		"/C/Programming/bbs/sources/paid_service/paid_service/Sprav/Прием амб.csv",
+		"/C/Users/DevOps/AppData/Local/VirtualStore/Program Files (x86)/Peak Systems/UI-View32/Uiview32.INI",
+		"/D/downloads/convertcsv(12).csv",
+		"/D/downloads/convertcsv(11).csv"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"ADD COLUMN",
+			"ALTER TABLE medical_vc.patients_vc"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/DevOps/Desktop/import",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 245,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								245,
+								245
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Trigger/Version_control/patients.sql",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6707,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6692,
+								6692
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/SQL/SQL.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 5749.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1679,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								525,
+								525
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "DB_ttlife24.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
